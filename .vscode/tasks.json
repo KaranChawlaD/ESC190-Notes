@@ -8,7 +8,7 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 // "${file}",
-                "lec13.c",
+                "lec14.c",
                 "lec13-mystr.c",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
