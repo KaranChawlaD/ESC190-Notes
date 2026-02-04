@@ -1,5 +1,6 @@
 #include "lec13-mystr.h"
 #include <stdlib.h>
+#include <string.h>
 
 void create_string(mystr **p_s, const char *init) {
     (*p_s) = (mystr *)malloc(sizeof(mystr));

@@ -30,4 +30,5 @@
 int main() {
     mystr *s1;
     create_string(&s1, "Hi");
+    printf("Done");
 }
