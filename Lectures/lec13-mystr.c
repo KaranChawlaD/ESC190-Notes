@@ -9,3 +9,18 @@ void create_string(mystr **p_s, const char *init) {
     strcpy((*p_s)->buffer, init);
     (*p_s)->length = strlen(init);
 }
+
+mystr *append_strings(mystr *s1, mystr *s2) {
+    mystr *res;
+    char *buffer = (char *)malloc(s1->length + s2->length + 1);
+    strcpy(buffer, s1->buffer);
+    strcat(buffer, s2->buffer);
+    create_string(&res, buffer);
+    free(buffer);
+    return res;
+}
+
+void destroy_string(mystr *s1) {
+    free(s1->buffer);
+    free(s1);
+}
