@@ -17,7 +17,7 @@ print(stack_pop(s))
 print(stack_pop(s))
 
 s = make_stack()
-L = ["episolon", "delta", "integral", "series"]
+L = ["episilon", "delta", "integral", "series"]
 for e in L:
     stack_push(s, e)
 while not stack_isempty(s):
