@@ -27,7 +27,7 @@ student read_in_line(char *line) {
     int count = 0;
     while(line[i] != '\0') {
         cur_grade = 0;
-        while(line[i] != '\0' && line[i] != ' ') {
+        while(line[i] != '\0' && line[i] != ' ' && line[i] != '\n') {
             cur_grade = 10 * cur_grade + (line[i] - '0');
             i ++;
         }
@@ -39,13 +39,42 @@ student read_in_line(char *line) {
     return s;
 }
 
-void read_in_all_data(char *filename) {
-    int n_students;
+void read_in_all_data(char *filename, student **p_all_students, int *p_n_students) {
+    int n_students = 0;
     FILE *fp = fopen(filename, "r");
     char cur_line[10000];
     while(!feof(fp)) {
-        fgets(fp, cur_line, 10000);
+        fgets(cur_line, 10000-1, fp);
         n_students ++;
+    }
+    fclose(fp);
+    printf("%d\n", n_students);
+    student *all_students = (student *)malloc(sizeof(student) * n_students);
+    int i = 0;
+    fp = fopen(filename, "r");
+    for (i = 0; i < n_students; i++) {
+        fgets(cur_line, 10000-1, fp);
+        all_students[i] = read_in_line(cur_line);
+    }
+    // for (i = 0; i < n_students; i++) {
+    //     printf("%s: %f\n", all_students[i].number, all_students[i].average);
+    // }
+    *p_all_students = all_students;
+    *p_n_students = n_students;
+}
+
+void print_best_performers(student *all_students, int n_students) {
+    double cur_max = -1;
+    int i;
+    for (i = 0; i < n_students; i ++) {
+        if (all_students[i].average > cur_max) {
+            cur_max = all_students[i].average;
+        }
+    }
+    for (i = 0; i < n_students; i ++) {
+        if (all_students[i].average == cur_max) {
+            printf("WINNER: %s\n", all_students[i].number);
+        }
     }
 }
 
@@ -75,7 +104,17 @@ int my_struct_cmp_lexicographic(const void *s1, const void *s2)
     }
 }
 
-int main()
+int main() {
+    student *all_students;
+    int n_students;
+    read_in_all_data("lec17.txt", &all_students, &n_students);
+    print_best_performers(all_students, n_students);
+    // char line[] = "9874512541 12 13 14 15 16\n";
+    // student s = read_in_line(line);
+    // printf("%s: %f", s.number, s.average);
+}
+
+int main1()
 {
     int arr[4] = {5, 2, 3, 10};
     qsort(arr, 4, sizeof(int), cmpfunc);
