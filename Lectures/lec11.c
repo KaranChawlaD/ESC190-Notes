@@ -24,8 +24,8 @@ void change_name_1(student1 *s1) {
 }
 
 void change_name_2(student2 *s2) {
-    //s2->name = "mike";            // allowed: you can change the value of address name to smth else
-    strcpy(s2->name, "mike");       // depends: if s2->name is actually an address of a string literal, may crash
+    s2->name = "mike";            // allowed: you can change the value of address name to smth else
+    //strcpy(s2->name, "mike");       // depends: if s2->name is actually an address of a string literal, may crash
 }
 
 void change_name_3(student3 *s3) {
